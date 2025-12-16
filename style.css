@@ -10,13 +10,17 @@
 
 * { margin: 0; padding: 0; box-sizing: border_box; cursor: none; }
 
-body {
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; /* FONDAMENTALE PER LO ZOOM FIX */
     background-color: var(--bg-color); 
     color: var(--text-color); 
     font-family: var(--font-body);
-    overflow-x: hidden; 
     line-height: 1.8;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    /* Prevenzione zoom involontario su iOS */
+    -webkit-text-size-adjust: 100%;
 }
 
 /* CURSORE */
@@ -49,48 +53,18 @@ body {
     position: absolute;
     max-width: 500px; 
     height: auto;
-    object-fit: contain; /* Assicura che l'immagine non si deformi */
+    object-fit: contain;
 }
 
-/* --- POSIZIONAMENTO DESKTOP (Stabile) --- */
-/* Transform-origin è la chiave: blocca l'angolo al bordo */
-
-/* Alto Sx: Ancorato all'angolo in alto a sinistra */
-.f-tl { 
-    top: -5%; left: -5%; 
-    width: 25vw; 
-    transform-origin: top left; 
-    transform: rotate(0deg); /* Regola rotazione qui */
-}
-
-/* Alto Dx: Ancorato all'angolo in alto a destra */
-.f-tr { 
-    top: -5%; right: -5%; 
-    width: 25vw; 
-    transform-origin: top right; 
-    transform: rotate(0deg);
-}
-
-/* Basso Sx: Ancorato all'angolo in basso a sinistra */
-.f-bl { 
-    bottom: -5%; left: -5%; 
-    width: 28vw; 
-    transform-origin: bottom left; 
-    transform: rotate(0deg);
-}
-
-/* Basso Dx: Ancorato all'angolo in basso a destra */
-.f-br { 
-    bottom: -5%; right: -5%; 
-    width: 28vw; 
-    transform-origin: bottom right; 
-    transform: rotate(0deg);
-}
+/* POSIZIONAMENTO DESKTOP */
+.f-tl { top: -8%; left: -8%; width: 28vw; transform-origin: top left; transform: rotate(-15deg); }
+.f-tr { top: -5%; right: -5%; width: 28vw; transform-origin: top right; transform: rotate(5deg); }
+.f-bl { bottom: -5%; left: -5%; width: 30vw; transform-origin: bottom left; transform: rotate(-5deg); }
+.f-br { bottom: -10%; right: -5%; width: 32vw; transform-origin: bottom right; transform: rotate(5deg); }
 
 .reveal-img { opacity: 0; transform: scale(0.9); filter: blur(10px); }
 
 /* CONTENUTO HERO */
-/* Padding laterale extra per evitare che il testo tocchi i fiori su schermi medi */
 .hero-content { position: relative; z-index: 2; padding: 0 2rem; max-width: 900px; width: 100%;}
 .names { font-family: var(--font-heading); font-size: 6.5rem; font-weight: 300; line-height: 0.9; margin-bottom: 1.5rem; color: var(--text-color); }
 .amp { font-family: var(--font-heading); font-style: italic; color: var(--accent-gold); font-weight: 400;}
@@ -98,7 +72,7 @@ body {
 
 .countdown-container { display: flex; justify-content: center; gap: 2rem; }
 .time-card {
-    background: rgba(250, 249, 246, 0.6); backdrop-filter: blur(4px); /* Blur per staccare dal fondo */
+    background: rgba(250, 249, 246, 0.6); backdrop-filter: blur(4px);
     border: 1px solid var(--accent-gold); padding: 1.5rem 2rem; min-width: 130px;
     display: flex; flex-direction: column; align-items: center;
     box-shadow: 0 5px 15px rgba(166, 138, 100, 0.1);
@@ -111,7 +85,7 @@ body {
 
 
 /* --- STORIA --- */
-.story-section { padding: 120px 20px; background-color: #fff; }
+.story-section { padding: 120px 20px; background-color: #fff; overflow: hidden; /* Fix carosello */ }
 .container-text { max-width: 750px; margin: 0 auto; text-align: left; }
 .section-title { font-family: var(--font-heading); font-size: 3.5rem; text-align: center; margin-bottom: 4rem; color: var(--accent-gold); font-style: italic; }
 
@@ -122,9 +96,16 @@ body {
 .quote-box::before { content: '“'; position: absolute; top: -1rem; left: 50%; transform: translateX(-50%); font-family: var(--font-heading); font-size: 5rem; color: var(--accent-sage); opacity: 0.3; }
 .highlight { font-family: var(--font-heading); font-size: 2rem; color: var(--accent-gold); line-height: 1.3; font-style: italic; }
 
-.marquee-gallery { margin-top: 80px; overflow: hidden; width: 100%; }
+/* Gallery Carosello */
+.marquee-gallery { 
+    margin-top: 80px; 
+    overflow: hidden; 
+    width: 100vw; /* Forza larghezza viewport */
+    margin-left: -20px; /* Compensa padding section */
+    position: relative; 
+}
 .track { display: flex; gap: 20px; width: max-content; animation: scroll 50s linear infinite; }
-.track img { height: 350px; width: auto; filter: sepia(20%); transition: filter 0.5s; }
+.track img { height: 350px; width: auto; filter: sepia(20%); transition: filter 0.5s; object-fit: cover;}
 .track img:hover { filter: sepia(0%); }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -161,68 +142,52 @@ body {
 
 footer { padding: 3rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
 
-/* --- MOBILE ADAPTIVE (FIX ANCORAGGIO DEFINITIVO) --- */
+/* --- MOBILE ADAPTIVE (FIX 100%) --- */
 @media (max-width: 768px) {
-    /* 1. Testo: Garanzia di non sovrapposizione */
-    .hero-content {
-        padding: 0 15px; /* Spazio di sicurezza dai bordi */
-        width: 100%;
-        margin-top: -20px; /* Bilanciamento ottico */
+    /* 1. Reset generale per evitare overflow */
+    body { width: 100%; overflow-x: hidden; }
+    
+    /* 2. Hero Content: Centrato e sicuro */
+    .hero-content { 
+        width: 100%; 
+        padding: 0 10px; 
+        margin: 0 auto; 
     }
-    .names { font-size: 3.2rem; margin-bottom: 1rem; }
-    .date { font-size: 1.1rem; margin-bottom: 2rem; }
+    .names { font-size: 3.2rem; }
+    .date { margin-bottom: 2rem; }
 
-    /* 2. FIORI MOBILE: Logica "Spingi Fuori" */
-    /* La logica è: Usa valori negativi per assicurarsi che il bordo del fiore (gambo) sia fuori */
+    /* 3. Fiori Mobile: Ancoraggio solido con valori negativi */
+    .flower { opacity: 0.9; max-width: none; } 
     
-    /* Alto Sinistra: Spostato fuori a sinistra e in alto */
-    .f-tl { 
-        width: 60vw; 
-        top: -10%; 
-        left: -20%; 
-        transform-origin: top left;
-        transform: rotate(10deg); /* Leggera rotazione per puntare al centro */
-    }
-    
-    /* Alto Destra: Spostato fuori a destra e in alto */
-    .f-tr { 
-        width: 65vw; 
-        top: -8%; 
-        right: -25%; 
-        transform-origin: top right;
-        transform: rotate(-10deg);
-    }
-    
-    /* Basso Sinistra: ANCORAGGIO CRITICO */
-    /* Usiamo bottom negativo per nascondere il taglio */
-    .f-bl { 
-        width: 65vw; 
-        bottom: -10%; /* Spinge GIÙ fuori dallo schermo */
-        left: -20%;   /* Spinge a SINISTRA fuori dallo schermo */
-        top: auto;    /* Disabilita top */
-        transform-origin: bottom left;
-        transform: rotate(-5deg);
-    }
-    
-    /* Basso Destra: ANCORAGGIO CRITICO */
-    .f-br { 
-        width: 60vw; 
-        bottom: -12%; /* Spinge GIÙ */
-        right: -20%;  /* Spinge a DESTRA */
-        top: auto;    /* Disabilita top */
-        transform-origin: bottom right;
-        transform: rotate(5deg);
-    }
+    /* Alto Sx */
+    .f-tl { width: 55vw; top: -10%; left: -25%; transform: rotate(-20deg); transform-origin: top left; }
+    /* Alto Dx */
+    .f-tr { width: 60vw; top: -5%; right: -30%; transform: rotate(10deg); transform-origin: top right; }
+    /* Basso Sx (CORRETTO): Bottom negativo e Left negativo per non volare */
+    .f-bl { width: 65vw; bottom: -12%; left: -25%; top: auto; transform: rotate(-10deg); transform-origin: bottom left; }
+    /* Basso Dx */
+    .f-br { width: 60vw; bottom: -10%; right: -25%; top: auto; transform: rotate(10deg); transform-origin: bottom right; }
 
-    /* Countdown adattato */
+    /* 4. Countdown Mobile */
     .countdown-container { gap: 0.5rem; }
-    .time-card { min-width: 70px; padding: 0.8rem; background: rgba(250,249,246,0.5); } 
+    .time-card { 
+        min-width: 70px; padding: 0.8rem; 
+        border: none; background: rgba(250,249,246,0.6); box-shadow: none; 
+        border-right: 1px solid rgba(166,138,100,0.3); 
+    }
+    .time-card:last-child { border: none; }
     .time-card span { font-size: 2.2rem; }
     
-    /* Storia & Programma */
-    .story-body p { text-align: left; font-size: 1.1rem; }
-    .drop-cap { font-size: 4rem; }
-    .program-list { padding-left: 1.5rem; }
-    .program-row::before { left: -1.85rem; }
-    .track img { height: 200px; }
+    /* 5. Storia Mobile */
+    .story-section { padding: 60px 20px; }
+    .story-body p { text-align: left; font-size: 1.1rem; line-height: 1.6; }
+    .drop-cap { font-size: 4rem; line-height: 0.9; }
+    
+    /* 6. Carosello Mobile (FIX) */
+    .marquee-gallery { margin-top: 40px; margin-left: -20px; width: 100vw; }
+    .track img { height: 160px; /* Ridotto per stare nello schermo */ }
+    
+    /* 7. Programma Mobile */
+    .program-list { padding-left: 1rem; }
+    .program-row::before { left: -1.35rem; }
 }
