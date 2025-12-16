@@ -8,95 +8,103 @@
     --font-body: 'Montserrat', sans-serif;
 }
 
-/* RESET UNIVERSALE ROBUSTO */
-* { margin: 0; padding: 0; box-sizing: border_box; outline: none; -webkit-tap-highlight-color: transparent; }
+/* RESET MASSIVO */
+* { margin: 0; padding: 0; box-sizing: border_box; -webkit-font-smoothing: antialiased; }
 
-html {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* Blocca scroll orizzontale a livello radice */
-}
-
-body {
+html, body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden; /* Doppia sicurezza */
+    overflow-x: hidden; /* BLOCCO SCROLL ORIZZONTALE */
     background-color: var(--bg-color); 
     color: var(--text-color); 
     font-family: var(--font-body);
     line-height: 1.6;
+    /* Texture carta */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-    -webkit-text-size-adjust: 100%; /* Fix font size iPhone */
 }
 
 /* UTILITY */
-.cursor-dot, .cursor-outline { display: none; } /* Nascondiamo cursore custom su mobile di default, riattiviamo su desktop */
-@media (min-width: 992px) {
+.cursor-dot, .cursor-outline { display: none; }
+@media (min-width: 1024px) {
     .cursor-dot { display: block; position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: var(--accent-gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
     .cursor-outline { display: block; position: fixed; top: 0; left: 0; width: 40px; height: 40px; border: 1px solid var(--accent-gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; }
 }
 
 /* PRELOADER */
 .preloader { position: fixed; inset: 0; background: var(--bg-color); z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.loader-text { font-family: var(--font-heading); font-size: 2.5rem; color: var(--accent-gold); letter-spacing: 2px; animation: pulse 2s infinite; text-align: center;}
+.loader-text { font-family: var(--font-heading); font-size: 2.5rem; color: var(--accent-gold); letter-spacing: 2px; animation: pulse 2s infinite; }
 .loading-bar-container { width: 150px; height: 2px; background: rgba(166, 138, 100, 0.3); margin-top: 20px; border-radius: 2px; overflow: hidden; }
 .loading-bar-fill { height: 100%; width: 0%; background: var(--accent-gold); animation: loadProgress 2.2s ease-in-out forwards; }
 @keyframes loadProgress { to { width: 100%; } }
 
 /* LINGUA */
-.lang-switcher { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100; display: flex; gap: 0.8rem; }
-.lang-btn { background: none; border: none; color: var(--text-color); font-family: var(--font-body); font-weight: 500; cursor: pointer; opacity: 0.5; transition: 0.3s; font-size: 0.9rem;}
+.lang-switcher { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100; display: flex; gap: 1rem; }
+.lang-btn { background: none; border: none; color: var(--text-color); font-family: var(--font-body); font-weight: 500; cursor: pointer; opacity: 0.5; transition: 0.3s; }
 .lang-btn.active { opacity: 1; text-decoration: underline; color: var(--accent-gold); }
 
-/* --- HERO SECTION --- */
+/* --- HERO SECTION 100% ADAPTIVE --- */
 .hero {
-    min-height: 100vh; /* Usa min-height per evitare tagli su schermi piccoli */
+    /* Usa altezza dinamica per evitare problemi su mobile */
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic Viewport Height per Mobile */
     width: 100%; 
     position: relative; 
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
     text-align: center; 
     overflow: hidden; 
-    padding: 6rem 1rem 2rem 1rem; /* Padding top extra per non coprire col menu lingua */
+    padding: 2rem 1rem;
 }
 
-/* CONTENITORE FIORI */
-.floral-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden;}
+/* CONTENITORE FIORI (STRUTTURA SICURA) */
+.floral-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
 .flower {
     position: absolute;
+    /* Max larghezza responsiva per non invadere */
+    width: 30vw;
+    max-width: 400px; 
     height: auto;
     object-fit: contain;
 }
 
-/* POSIZIONAMENTO DESKTOP (Default) */
-.f-tl { width: 25vw; max-width: 400px; top: -8%; left: -5%; transform-origin: top left; transform: rotate(-10deg); }
-.f-tr { width: 25vw; max-width: 400px; top: -5%; right: -5%; transform-origin: top right; transform: rotate(5deg); }
-.f-bl { width: 28vw; max-width: 450px; bottom: -5%; left: -5%; transform-origin: bottom left; transform: rotate(-5deg); }
-.f-br { width: 28vw; max-width: 450px; bottom: -10%; right: -5%; transform-origin: bottom right; transform: rotate(5deg); }
+/* POSIZIONAMENTO DESKTOP */
+.f-tl { top: -5%; left: -5%; transform-origin: top left; transform: rotate(-10deg); }
+.f-tr { top: -5%; right: -5%; transform-origin: top right; transform: rotate(10deg); }
+.f-bl { bottom: -5%; left: -5%; transform-origin: bottom left; transform: rotate(-5deg); }
+.f-br { bottom: -5%; right: -5%; transform-origin: bottom right; transform: rotate(5deg); }
 
 .reveal-img { opacity: 0; transform: scale(0.9); filter: blur(10px); }
 
-/* CONTENUTO HERO */
-.hero-content { position: relative; z-index: 2; width: 100%; max-width: 900px; margin: 0 auto; }
+/* CONTENUTO HERO CENTRALE */
+.hero-content { 
+    position: relative; 
+    z-index: 2; 
+    width: 100%; 
+    max-width: 800px;
+    padding: 0 15px; /* Padding di sicurezza per non toccare i bordi */
+}
+
 .names { 
     font-family: var(--font-heading); 
-    font-size: 5rem; /* Ridotto leggermente per sicurezza */
+    font-size: clamp(3rem, 8vw, 6.5rem); /* FONT FLUIDO: Si adatta matematicamente */
     font-weight: 300; 
-    line-height: 1; 
+    line-height: 1.1; 
     margin-bottom: 1rem; 
     color: var(--text-color); 
-    word-spacing: 5px;
+    word-break: keep-all; /* Evita rotture brutte delle parole */
 }
 .amp { font-family: var(--font-heading); font-style: italic; color: var(--accent-gold); font-weight: 400;}
-.date { font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 3rem; color: var(--accent-sage); font-weight: 500;}
+.date { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 3rem; color: var(--accent-sage); font-weight: 500;}
 
-/* Countdown */
-.countdown-container { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+.countdown-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 .time-card {
     background: rgba(250, 249, 246, 0.6); backdrop-filter: blur(4px);
     border: 1px solid var(--accent-gold); 
     padding: 1rem 1.5rem; 
-    min-width: 100px;
+    min-width: 90px;
     display: flex; flex-direction: column; align-items: center;
     box-shadow: 0 5px 15px rgba(166, 138, 100, 0.1);
 }
@@ -104,7 +112,7 @@ body {
 .time-card small { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-color); margin-top: 5px;}
 
 .scroll-indicator { position: absolute; bottom: 2rem; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6; z-index: 2; font-size: 0.8rem; letter-spacing: 2px;}
-.line { width: 1px; height: 40px; background: var(--accent-gold); }
+.line { width: 1px; height: 50px; background: var(--accent-gold); }
 
 
 /* --- STORIA --- */
@@ -119,34 +127,39 @@ body {
     width: 100%; 
     max-width: 750px; 
     margin: 0 auto; 
-    padding: 0 25px; /* Padding laterale sicuro */
+    padding: 0 25px; /* Margine laterale obbligatorio */
 }
-.section-title { font-family: var(--font-heading); font-size: 3rem; text-align: center; margin-bottom: 3rem; color: var(--accent-gold); font-style: italic; }
+.section-title { font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); text-align: center; margin-bottom: 3rem; color: var(--accent-gold); font-style: italic; }
 
-.story-body p { font-size: 1.15rem; margin-bottom: 2rem; color: #555; text-align: justify; }
-.drop-cap { float: left; font-family: var(--font-heading); font-size: 5rem; line-height: 0.8; color: var(--accent-gold); padding-right: 10px; padding-top: 5px; }
+.story-body p { 
+    font-size: 1.15rem; 
+    margin-bottom: 2rem; 
+    color: #555; 
+    text-align: left; /* Più sicuro su mobile */
+    line-height: 1.6;
+}
+@media(min-width: 768px) { .story-body p { text-align: justify; font-size: 1.25rem; } }
 
-.quote-box { margin-top: 3rem; text-align: center; position: relative; padding: 2rem 1rem; }
+.drop-cap { float: left; font-family: var(--font-heading); font-size: 5rem; line-height: 0.8; color: var(--accent-gold); padding-right: 15px; padding-top: 5px; }
+
+.quote-box { margin-top: 4rem; text-align: center; position: relative; padding: 2rem 1rem; }
 .quote-box::before { content: '“'; position: absolute; top: -0.5rem; left: 50%; transform: translateX(-50%); font-family: var(--font-heading); font-size: 4rem; color: var(--accent-sage); opacity: 0.3; }
-.highlight { font-family: var(--font-heading); font-size: 1.6rem; color: var(--accent-gold); line-height: 1.4; font-style: italic; }
+.highlight { font-family: var(--font-heading); font-size: clamp(1.5rem, 4vw, 2rem); color: var(--accent-gold); line-height: 1.4; font-style: italic; }
 
-/* Gallery */
-.marquee-gallery { margin-top: 50px; width: 100%; overflow: hidden; white-space: nowrap; }
-.track { display: flex; gap: 15px; width: max-content; animation: scroll 40s linear infinite; }
-.track img { height: 280px; width: auto; filter: sepia(20%); transition: filter 0.5s; object-fit: cover; }
+.marquee-gallery { margin-top: 60px; width: 100%; overflow: hidden; white-space: nowrap; }
+.track { display: inline-flex; gap: 20px; animation: scroll 40s linear infinite; }
+.track img { height: 250px; width: auto; object-fit: cover; }
+@media(max-width: 768px) { .track img { height: 180px; } }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 
 /* --- PROGRAMMA --- */
-.section-divider { width: 100%; line-height: 0; background-color: #fff; }
-.section-divider svg { display: block; width: 100%; height: auto; fill: var(--bg-color); }
+.section-divider svg { display: block; width: 100%; height: auto; fill: var(--bg-color); background: #fff;}
 
-.program-section { width: 100%; padding: 80px 0; background-color: var(--bg-color); }
-.container { width: 100%; padding: 0 20px; margin: 0 auto; max-width: 1200px;} /* Container generico sicuro */
-
-.program-list { max-width: 600px; margin: 0 auto; border-left: 1px solid var(--accent-gold); padding-left: 2rem; }
+.program-section { width: 100%; padding: 80px 20px; background-color: var(--bg-color); }
+.program-list { max-width: 600px; margin: 0 auto; border-left: 1px solid var(--accent-gold); padding-left: 1.5rem; }
 .program-row { margin-bottom: 3rem; position: relative; }
-.program-row::before { content: ''; position: absolute; left: -2.35rem; top: 5px; width: 10px; height: 10px; background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; }
+.program-row::before { content: ''; position: absolute; left: -1.85rem; top: 5px; width: 10px; height: 10px; background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; }
 
 .p-time { font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
 .p-info h3 { font-size: 1.6rem; margin-bottom: 0.5rem; font-weight: 400; }
@@ -170,64 +183,67 @@ footer { width: 100%; padding: 2rem; text-align: center; font-size: 0.8rem; opac
 
 
 /* =========================================
-   MOBILE ADAPTIVE (FIX CRITICO IPHONE) 
+   MEDIA QUERIES (MOBILE IPHONE/ANDROID)
    ========================================= */
 @media (max-width: 768px) {
-    /* HERO */
-    .hero { padding: 8rem 1rem 4rem 1rem; } /* Più spazio sopra per non tagliare */
-    
-    .names { font-size: 3.5rem; margin-bottom: 0.5rem; line-height: 1.1; }
-    .date { font-size: 1rem; margin-bottom: 2rem; }
-
-    /* FIORI MOBILE: Opacità ridotta e posizioni "Safe" */
-    .flower { opacity: 0.6; } 
-    
-    /* Alto Sx: Spinto più dentro e ruotato per nascondere gambo */
-    .f-tl { 
-        width: 60vw; 
-        top: -5%; 
-        left: -20%; 
-        transform: rotate(25deg); /* Ruotato verso il centro */
+    /* 1. LAYOUT SAFE */
+    .hero-content {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 15px; /* Assicura che il testo non tocchi mai i bordi */
     }
-    /* Alto Dx */
-    .f-tr { width: 60vw; top: -5%; right: -25%; transform: rotate(-5deg); }
-    /* Basso Sx */
-    .f-bl { width: 60vw; bottom: 0%; left: -25%; transform: rotate(-10deg); }
-    /* Basso Dx */
-    .f-br { width: 60vw; bottom: 0%; right: -25%; transform: rotate(10deg); }
+    
+    /* 2. FIORI MOBILE: ANCORATI E TRASPARENTI */
+    .flower {
+        opacity: 0.7; /* Meno invasivi */
+        position: absolute;
+    }
+    
+    /* Regola d'oro: Usa valori in pixel o percentuali negative sicure */
+    
+    /* Alto Sinistra: Spinge dentro ma ruotato per nascondere taglio */
+    .f-tl { 
+        width: 180px; 
+        top: -20px; 
+        left: -40px; 
+        transform: rotate(20deg); 
+    }
+    
+    /* Alto Destra */
+    .f-tr { 
+        width: 180px; 
+        top: -10px; 
+        right: -50px; 
+        transform: rotate(-10deg); 
+    }
+    
+    /* Basso Sinistra: Fissato al fondo della viewport */
+    .f-bl { 
+        width: 200px; 
+        bottom: -20px; 
+        left: -50px; 
+        top: auto; 
+        transform: rotate(-10deg); 
+    }
+    
+    /* Basso Destra */
+    .f-br { 
+        width: 180px; 
+        bottom: -30px; 
+        right: -40px; 
+        top: auto; 
+        transform: rotate(10deg); 
+    }
 
-    /* COUNTDOWN */
+    /* 3. COUNTDOWN COMPATTO */
     .countdown-container { gap: 0.5rem; }
     .time-card { min-width: 70px; padding: 0.8rem 0.5rem; }
     .time-card span { font-size: 2rem; }
-    
-    /* STORIA */
-    .story-section { padding: 60px 0; }
-    .container-text { padding: 0 20px; } /* Margine di sicurezza laterale */
-    .section-title { font-size: 2.5rem; margin-bottom: 2rem; }
-    .story-body p { 
-        text-align: left; /* Justify su mobile crea spazi brutti */
-        font-size: 1.05rem; 
-        line-height: 1.5; 
-    }
-    .drop-cap { font-size: 3.5rem; padding-right: 8px; }
-    .highlight { font-size: 1.3rem; }
-    
-    /* CAROSELLO */
-    .marquee-gallery { margin-top: 40px; }
-    .track img { height: 180px; } /* Altezza ridotta per stare nello schermo */
-    
-    /* PROGRAMMA */
-    .program-section { padding: 60px 0; }
-    .program-list { padding-left: 1.5rem; margin-left: 10px; margin-right: 10px;}
-    .program-row::before { left: -1.85rem; } /* Aggiustamento pallino */
-    .p-info h3 { font-size: 1.4rem; }
 }
 
-/* FIX PER SCHERMI MOLTO PICCOLI (iPhone SE/Mini) */
+/* FIX PER SCHERMI MOLTO PICCOLI (iPhone SE, Mini) */
 @media (max-width: 380px) {
     .names { font-size: 2.8rem; }
-    .f-tl, .f-tr, .f-bl, .f-br { width: 70vw; opacity: 0.5; }
     .time-card { min-width: 60px; }
     .time-card span { font-size: 1.8rem; }
 }
