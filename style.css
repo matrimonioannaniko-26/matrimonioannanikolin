@@ -13,6 +13,7 @@
 
 html {
     width: 100%;
+    height: 100%;
     overflow-x: hidden; 
     -webkit-text-size-adjust: 100%; 
 }
@@ -48,11 +49,16 @@ body {
 
 /* --- HERO SECTION --- */
 .hero {
-    min-height: 100vh;
-    min-height: 100dvh; 
+    /* FIX IPHONE: dvh si adatta alla barra degli indirizzi dinamica */
+    height: 100vh;
+    height: 100dvh; 
+    min-height: 600px; /* Altezza minima di sicurezza */
     width: 100%; 
     position: relative; 
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
     text-align: center; 
     overflow: hidden; 
     padding: 0; 
@@ -60,19 +66,21 @@ body {
 
 .floral-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
 
+/* STILE BASE FIORI */
 .flower {
     position: absolute;
-    width: 35vw;
-    max-width: 500px; 
+    width: 25vw; /* Desktop standard */
+    /* FIX COMPENETRAZIONE DESKTOP: Dimensione massima ridotta drasticamente */
+    max-width: 350px; 
     height: auto;
     object-fit: contain;
 }
 
-/* POSIZIONAMENTO DESKTOP */
-.f-tl { top: -5%; left: -5%; transform-origin: top left; transform: rotate(-10deg); }
-.f-tr { top: -5%; right: -5%; transform-origin: top right; transform: rotate(10deg); }
-.f-bl { bottom: -5%; left: -5%; transform-origin: bottom left; transform: rotate(-5deg); }
-.f-br { bottom: -5%; right: -5%; transform-origin: bottom right; transform: rotate(5deg); }
+/* POSIZIONAMENTO DESKTOP (Spinti più agli angoli) */
+.f-tl { top: -8%; left: -8%; transform-origin: top left; transform: rotate(-10deg); }
+.f-tr { top: -8%; right: -8%; transform-origin: top right; transform: rotate(10deg); }
+.f-bl { bottom: -8%; left: -8%; transform-origin: bottom left; transform: rotate(-5deg); }
+.f-br { bottom: -8%; right: -8%; transform-origin: bottom right; transform: rotate(5deg); }
 
 .reveal-img { opacity: 0; transform: scale(0.9); filter: blur(10px); }
 
@@ -92,7 +100,7 @@ body {
 
 .names { 
     font-family: var(--font-heading); 
-    font-size: clamp(3rem, 9vw, 6.5rem); 
+    font-size: clamp(3rem, 8vw, 6.5rem); 
     font-weight: 300; 
     line-height: 1.1; 
     margin-bottom: 1rem; 
@@ -122,7 +130,7 @@ body {
 /* --- STORIA --- */
 .story-section { 
     width: 100%; 
-    padding: 80px 0; 
+    padding: 100px 0; 
     background-color: #fff; 
     position: relative;
     overflow: hidden;
@@ -176,62 +184,72 @@ footer { padding: 2rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
 
 
 /* =========================================
-   MOBILE ADAPTIVE (FIX MANUALE CENTRATURA)
+   MOBILE ADAPTIVE (FIX REALE PER DEVICE)
    ========================================= */
 @media (max-width: 768px) {
-    /* 1. HERO - SPOSTAMENTO MANUALE (IN ALTO A SINISTRA) */
-    .hero { 
-        /* Riduco padding top per spostare IN ALTO */
-        padding: 3rem 0 5rem 0; 
-    }
+    /* 1. HERO */
+    .hero { padding: 0; }
     
     .hero-content { 
-        width: 100%;
+        width: 100%; 
+        padding: 0 15px; 
         margin: 0 auto;
-        padding: 0 15px;
-        align-items: center;
-        text-align: center;
-        /* SPOSTAMENTO MANUALE A SINISTRA */
-        position: relative;
-        left: -10px;
+        /* Rimuovo qualsiasi left/right manuale che potrebbe sfasare */
+        left: auto; right: auto; 
+        display: flex; flex-direction: column; align-items: center;
     }
-    .names { font-size: 3rem; margin-left: 0; margin-right: 0; width: 100%; }
+    
+    .names { 
+        font-size: 3rem; 
+        margin: 0 0 0.5rem 0; 
+        width: 100%; 
+        text-align: center;
+    }
     .date { width: 100%; text-align: center; }
 
-    /* FIORI MOBILE */
-    .flower { opacity: 0.8; max-width: 200px; width: 50vw; }
-    .f-tl { top: -30px; left: -40px; transform-origin: top left; transform: rotate(25deg); }
-    .f-tr { top: -20px; right: -50px; transform-origin: top right; transform: rotate(-15deg); }
+    /* 2. FIORI MOBILE - Dimensione e posizione sicura */
+    .flower { 
+        opacity: 0.8; 
+        width: 150px; /* Larghezza fissa piccola per non invadere */
+        max-width: 40vw; 
+    }
+    /* Posizionamento fisso negli angoli con rotazione */
+    .f-tl { top: -20px; left: -30px; transform-origin: top left; transform: rotate(25deg); }
+    .f-tr { top: -20px; right: -40px; transform-origin: top right; transform: rotate(-15deg); }
     .f-bl { bottom: -20px; left: -30px; top: auto; transform-origin: bottom left; transform: rotate(-10deg); }
     .f-br { bottom: -30px; right: -30px; top: auto; transform-origin: bottom right; transform: rotate(15deg); }
 
-    /* COUNTDOWN */
-    .countdown-container { gap: 0.5rem; margin-left: 0; }
+    /* 3. COUNTDOWN */
+    .countdown-container { gap: 0.5rem; width: 100%; justify-content: center; }
     .time-card { min-width: 65px; padding: 0.8rem 0.4rem; background: rgba(250, 249, 246, 0.7); }
     .time-card span { font-size: 1.8rem; }
     
-    /* STORIA MOBILE */
+    /* 4. STORIA */
     .story-section { padding: 60px 0; }
     .container-text { padding: 0 20px; width: 100%; box-sizing: border-box; }
     
-    /* 2. PROGRAMMA MOBILE - SPOSTAMENTO MANUALE (A SINISTRA) */
+    /* 5. PROGRAMMA MOBILE (CENTRATO E SENZA MAPPA) */
     .program-section { padding: 60px 20px; }
     
     .program-list { 
         padding-left: 0; 
-        border-left: none; 
+        border-left: none; /* RIMOSSA LINEA CHE SPOSTA A DX */
         margin: 0 auto; 
         text-align: center;
         width: 100%;
-        /* SPOSTAMENTO MANUALE A SINISTRA */
-        position: relative;
-        left: -10px;
+        left: auto; /* Reset */
     }
     
-    .program-row { display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; position: relative; }
-    .program-row::before { display: none; }
+    .program-row { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        margin-bottom: 4rem; 
+        position: relative;
+    }
+    .program-row::before { display: none; } /* VIA IL PALLINO */
     
-    /* MAPPE MOBILE (BOTTONE) */
+    /* Mappa nascosta, solo bottone */
     .map-embed { display: none; }
     .map-link {
         display: inline-block; margin-top: 10px; padding: 10px 25px;
