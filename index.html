@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna & Nikolin | 24.08.2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="lang-switcher">
+        <button onclick="setLanguage('it')" class="lang-btn active">IT</button>
+        <button onclick="setLanguage('en')" class="lang-btn">EN</button>
+        <button onclick="setLanguage('sq')" class="lang-btn">SQ</button>
+    </nav>
+
+    <div class="preloader">
+        <div class="loader-text">Anna & Nikolin</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar-fill"></div>
+        </div>
+    </div>
+
+    <header class="hero">
+        
+        <div class="floral-frame">
+            <img src="img/hero-top-left.png" class="flower f-tl reveal-img" alt="Decorazione">
+            <img src="img/hero-top-right.png" class="flower f-tr reveal-img" alt="Decorazione">
+            <img src="img/hero-bottom-left.png" class="flower f-bl reveal-img" alt="Decorazione">
+            <img src="img/hero-bottom-right.png" class="flower f-br reveal-img" alt="Decorazione">
+        </div>
+
+        <div class="hero-content">
+            <h1 class="names reveal-text">Anna <span class="amp">&</span> Nikolin</h1>
+            <p class="date reveal-text" data-i18n="hero_date">24 . 08 . 2026</p>
+            
+            <div class="countdown-container reveal-text">
+                <div class="time-card">
+                    <span id="days">00</span>
+                    <small data-i18n="days">Giorni</small>
+                </div>
+                <div class="time-card">
+                    <span id="hours">00</span>
+                    <small data-i18n="hours">Ore</small>
+                </div>
+                <div class="time-card">
+                    <span id="minutes">00</span>
+                    <small data-i18n="minutes">Min</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span data-i18n="scroll">Scorri</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section class="story-section">
+        <div class="container-text">
+            <h2 class="section-title fade-up" data-i18n="story_title">La nostra storia</h2>
+            
+            <div class="story-body">
+                <p class="fade-up first-paragraph">
+                    <span class="drop-cap">L</span><span data-i18n="story_full_1">a nostra storia è iniziata nell’estate del 2020, in un luogo che mai avremmo pensato potesse cambiare le nostre vite: il ristorante Daroberta’s a Salthill, Irlanda. Tra un turno e l’altro, tra sguardi e risate, qualcosa di magico è nato senza che ce ne accorgessimo davvero. È stato amore a prima vista, di quelli che ti sorprendono e ti restano nel cuore.</span>
+                </p>
+                
+                <p class="fade-up" data-i18n="story_full_2">
+                    All’inizio il nostro legame era un piccolo segreto, nascosto tra complicità e sorrisi rubati. Poi, nell’agosto di quello stesso anno, abbiamo deciso di non nasconderlo più e di vivere pienamente ciò che avevamo trovato l’uno nell’altra. Da allora sono passati anni di avventure, di sfide e di sogni condivisi. Ogni ostacolo ci ha resi più forti, ogni giorno insieme ci ha ricordato quanto il nostro amore sia vero.
+                </p>
+
+                <div class="quote-box fade-up">
+                    <p class="highlight" data-i18n="story_quote">"Oggi, sei anni dopo quel primo incontro, celebriamo la nostra unione circondati dalle persone che amiamo, grati per un amore nato quasi per caso, ma che ha trovato nel tempo la sua certezza più grande: noi."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee-gallery">
+            <div class="track">
+                <img src="img/foto1.jpg"><img src="img/foto2.jpg"><img src="img/foto3.jpg"><img src="img/foto4.jpg">
+                <img src="img/foto5.jpg"><img src="img/foto6.jpg"><img src="img/foto7.jpg"><img src="img/foto8.jpg">
+                <img src="img/foto1.jpg"><img src="img/foto2.jpg"><img src="img/foto3.jpg"><img src="img/foto4.jpg">
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,100 C320,0 420,0 720,80 C1020,160 1120,0 1440,100 V100 H0 Z" fill="#fff"></path>
+        </svg>
+    </div>
+
+    <section class="program-section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="program_title">Il Programma</h2>
+            
+            <div class="program-list">
+                <div class="program-row fade-up">
+                    <div class="p-time">15:00</div>
+                    <div class="p-info">
+                        <h3 data-i18n="ceremony_title">Celebrazione Matrimonio</h3>
+                        <p data-i18n="ceremony_desc">Parrocchia di Santa Maria Nascente</p>
+                        <a href="https://goo.gl/maps/TuozLink1" target="_blank" class="map-link">
+                            <i data-lucide="map-pin"></i> Berlingo, BS
+                        </a>
+                        <div class="map-embed">
+                            <iframe src="https://maps.google.com/maps?q=Parrocchia+di+Santa+Maria+Nascente+Berlingo&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-row fade-up">
+                    <div class="p-time" data-i18n="following">A seguire</div>
+                    <div class="p-info">
+                        <h3 data-i18n="reception_title">Ricevimento</h3>
+                        <p data-i18n="reception_desc">Tenuta Acquaviva</p>
+                        <a href="https://goo.gl/maps/TuozLink2" target="_blank" class="map-link">
+                            <i data-lucide="map-pin"></i> Travagliato, BS
+                        </a>
+                        <div class="map-embed">
+                            <iframe src="https://maps.google.com/maps?q=Tenuta+Acquaviva+Travagliato&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accommodation-simple fade-up">
+                <h4 data-i18n="night_title">Pernottamento</h4>
+                <p data-i18n="night_desc">Pernottamento disponibile presso Tenuta Acquaviva. Se interessati, contattateci.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="rsvp-section">
+        <div class="rsvp-content fade-up">
+            <h2 data-i18n="rsvp_title">Ci sarai?</h2>
+            <p data-i18n="rsvp_desc">Facci sapere se potrai festeggiare con noi.</p>
+            <a href="mailto:email@esempio.com" class="cta-button" data-i18n="rsvp_btn">Conferma Presenza</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Anna & Nikolin | 2026</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
