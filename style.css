@@ -167,11 +167,8 @@ body {
 .p-time { font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
 .p-info h3 { font-size: 1.6rem; margin-bottom: 0.5rem; font-weight: 400; }
 .p-info p { color: #666; margin-bottom: 1rem; }
-
-/* MAP LINK & EMBED DEFAULT (DESKTOP) */
 .map-link { display: inline-flex; align-items: center; gap: 5px; color: var(--accent-sage); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; margin-bottom: 1rem; }
 .map-embed { width: 100%; border-radius: 4px; overflow: hidden; filter: grayscale(100%) contrast(95%); border: 1px solid rgba(166, 138, 100, 0.3); display: block; }
-
 .accommodation-simple { text-align: center; margin-top: 4rem; padding: 2rem 1rem; border-top: 1px solid rgba(166, 138, 100, 0.3); max-width: 600px; margin-left: auto; margin-right: auto;}
 .rsvp-section { padding: 100px 20px; text-align: center; background: var(--accent-gold); color: var(--bg-color); }
 .cta-button { display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: var(--bg-color); color: var(--accent-gold); text-decoration: none; font-family: var(--font-heading); font-size: 1.2rem; transition: transform 0.3s; border: 1px solid var(--bg-color); }
@@ -179,70 +176,68 @@ footer { padding: 2rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
 
 
 /* =========================================
-   MOBILE ADAPTIVE (FIX CRITICO CENTRATURA E MAPPE)
+   MOBILE ADAPTIVE (FIX MANUALE CENTRATURA)
    ========================================= */
 @media (max-width: 768px) {
-    /* 1. HERO - CENTRATURA PERFETTA */
-    .hero { padding: 4rem 0; }
-    .hero-content { padding: 0 15px; margin: 0 auto; text-align: center; align-items: center;}
+    /* 1. HERO - SPOSTAMENTO MANUALE (IN ALTO A SINISTRA) */
+    .hero { 
+        /* Riduco padding top per spostare IN ALTO */
+        padding: 3rem 0 5rem 0; 
+    }
+    
+    .hero-content { 
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 15px;
+        align-items: center;
+        text-align: center;
+        /* SPOSTAMENTO MANUALE A SINISTRA */
+        position: relative;
+        left: -10px;
+    }
     .names { font-size: 3rem; margin-left: 0; margin-right: 0; width: 100%; }
     .date { width: 100%; text-align: center; }
 
-    /* 2. FIORI MOBILE - Sicuri e Speculari */
+    /* FIORI MOBILE */
     .flower { opacity: 0.8; max-width: 200px; width: 50vw; }
     .f-tl { top: -30px; left: -40px; transform-origin: top left; transform: rotate(25deg); }
     .f-tr { top: -20px; right: -50px; transform-origin: top right; transform: rotate(-15deg); }
     .f-bl { bottom: -20px; left: -30px; top: auto; transform-origin: bottom left; transform: rotate(-10deg); }
     .f-br { bottom: -30px; right: -30px; top: auto; transform-origin: bottom right; transform: rotate(15deg); }
 
-    /* 3. COUNTDOWN */
+    /* COUNTDOWN */
     .countdown-container { gap: 0.5rem; margin-left: 0; }
     .time-card { min-width: 65px; padding: 0.8rem 0.4rem; background: rgba(250, 249, 246, 0.7); }
     .time-card span { font-size: 1.8rem; }
     
-    /* 4. STORIA MOBILE */
+    /* STORIA MOBILE */
     .story-section { padding: 60px 0; }
     .container-text { padding: 0 20px; width: 100%; box-sizing: border-box; }
     
-    /* 5. PROGRAMMA MOBILE (FIX SFASAMENTO DESTRA) */
+    /* 2. PROGRAMMA MOBILE - SPOSTAMENTO MANUALE (A SINISTRA) */
     .program-section { padding: 60px 20px; }
     
-    /* Rimuovo la linea laterale e i pallini che spostano tutto a destra */
     .program-list { 
         padding-left: 0; 
         border-left: none; 
         margin: 0 auto; 
-        text-align: center; /* Centro tutto il testo */
+        text-align: center;
         width: 100%;
-    }
-    
-    .program-row { 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        margin-bottom: 4rem;
+        /* SPOSTAMENTO MANUALE A SINISTRA */
         position: relative;
+        left: -10px;
     }
     
-    /* Nascondo il pallino laterale */
+    .program-row { display: flex; flex-direction: column; align-items: center; margin-bottom: 4rem; position: relative; }
     .program-row::before { display: none; }
     
-    /* MAPPE SU MOBILE: Nascondo iframe, potenzio il bottone */
-    .map-embed { display: none; } /* NASCONDE LA MAPPA CHE ROMPE IL LAYOUT */
-    
+    /* MAPPE MOBILE (BOTTONE) */
+    .map-embed { display: none; }
     .map-link {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 10px 25px;
-        background-color: var(--accent-sage);
-        color: #fff;
-        border-radius: 50px;
-        border: none;
-        font-weight: 500;
-        text-decoration: none;
+        display: inline-block; margin-top: 10px; padding: 10px 25px;
+        background-color: var(--accent-sage); color: #fff; border-radius: 50px; border: none; font-weight: 500; text-decoration: none;
     }
-    .map-link:hover { background-color: var(--text-color); color: #fff; border-color: transparent;}
-    .map-link i { vertical-align: middle; margin-right: 5px; }
 }
+
 
 
