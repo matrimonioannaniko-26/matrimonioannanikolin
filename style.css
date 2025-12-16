@@ -14,16 +14,14 @@
 html {
     width: 100%;
     height: 100%;
-    /* Blocca lo scroll orizzontale alla radice */
-    overflow-x: hidden; 
+    overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
     width: 100%;
     max-width: 100%;
-    /* Doppia sicurezza per evitare zoom indesiderati su mobile */
-    overflow-x: hidden; 
+    overflow-x: hidden;
     position: relative;
     background-color: var(--bg-color); 
     color: var(--text-color); 
@@ -51,7 +49,6 @@ body {
 
 /* --- HERO SECTION --- */
 .hero {
-    /* Usa min-height e dvh per adattarsi perfettamente ai browser mobile */
     min-height: 100vh;
     min-height: 100dvh; 
     width: 100%; 
@@ -66,7 +63,6 @@ body {
 
 .flower {
     position: absolute;
-    /* Max width in pixel per stabilità, width % per adattamento */
     width: 35vw;
     max-width: 500px; 
     height: auto;
@@ -88,20 +84,23 @@ body {
     width: 100%; 
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px; /* Padding di sicurezza laterale */
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centratura Flex */
 }
 
 .names { 
     font-family: var(--font-heading); 
-    /* Font fluido che scala tra un minimo e un massimo */
     font-size: clamp(3.5rem, 8vw, 6.5rem); 
     font-weight: 300; 
     line-height: 1.1; 
     margin-bottom: 1rem; 
     color: var(--text-color); 
+    text-align: center;
 }
 .amp { font-family: var(--font-heading); font-style: italic; color: var(--accent-gold); font-weight: 400;}
-.date { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 3rem; color: var(--accent-sage); font-weight: 500;}
+.date { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 3rem; color: var(--accent-sage); font-weight: 500; text-align: center;}
 
 .countdown-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 .time-card {
@@ -122,16 +121,15 @@ body {
 /* --- STORIA --- */
 .story-section { 
     width: 100%; 
-    padding: 100px 0; 
+    padding: 80px 0; 
     background-color: #fff; 
     position: relative;
-    overflow: hidden; /* Essenziale per il carosello */
+    overflow: hidden;
 }
 .container-text { 
     width: 100%; 
     max-width: 750px; 
     margin: 0 auto; 
-    /* MARGINE DI SICUREZZA: Il testo non toccherà mai i bordi */
     padding: 0 25px; 
 }
 .section-title { font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 4rem); text-align: center; margin-bottom: 3rem; color: var(--accent-gold); font-style: italic; }
@@ -140,10 +138,9 @@ body {
     font-size: 1.15rem; 
     margin-bottom: 2rem; 
     color: #555; 
-    text-align: left; /* Più sicuro su mobile */
+    text-align: left;
     line-height: 1.6;
 }
-/* Giustificato solo su schermi grandi */
 @media(min-width: 769px) { .story-body p { text-align: justify; font-size: 1.25rem; } }
 
 .drop-cap { float: left; font-family: var(--font-heading); font-size: 5rem; line-height: 0.8; color: var(--accent-gold); padding-right: 15px; padding-top: 5px; }
@@ -152,80 +149,106 @@ body {
 .quote-box::before { content: '“'; position: absolute; top: -0.5rem; left: 50%; transform: translateX(-50%); font-family: var(--font-heading); font-size: 4rem; color: var(--accent-sage); opacity: 0.3; }
 .highlight { font-family: var(--font-heading); font-size: clamp(1.6rem, 4vw, 2rem); color: var(--accent-gold); line-height: 1.4; font-style: italic; }
 
-/* Gallery Carosello (Contenuta) */
-.marquee-gallery { 
-    margin-top: 60px; 
-    width: 100%; 
-    overflow: hidden; 
-    white-space: nowrap;
-    position: relative;
-}
-.track { 
-    display: inline-flex; 
-    gap: 20px; 
-    /* Use transform for performance */
-    will-change: transform;
-    animation: scroll 40s linear infinite; 
-}
+.marquee-gallery { margin-top: 60px; width: 100%; overflow: hidden; white-space: nowrap; position: relative; }
+.track { display: inline-flex; gap: 20px; will-change: transform; animation: scroll 40s linear infinite; }
 .track img { height: 250px; width: auto; object-fit: cover; filter: sepia(20%); }
 @media(max-width: 768px) { .track img { height: 180px; } }
-@keyframes scroll { 
-    0% { transform: translateX(0); } 
-    100% { transform: translateX(calc(-250px * 8 - 20px * 8)); } /* Calcolo preciso della metà traccia */
-}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 8 - 20px * 8)); } }
 
 
-/* --- PROGRAMMA & ALTRI --- */
-/* Assicura che tutte le sezioni siano larghe il 100% e non di più */
-.section-divider, .program-section, .rsvp-section, footer { width: 100%; max-width: 100%; }
-
+/* --- PROGRAMMA --- */
 .section-divider svg { display: block; width: 100%; height: auto; fill: var(--bg-color); background: #fff;}
-.program-section { padding: 80px 20px; background-color: var(--bg-color); }
+.program-section { width: 100%; padding: 80px 20px; background-color: var(--bg-color); }
 .program-list { max-width: 600px; margin: 0 auto; border-left: 1px solid var(--accent-gold); padding-left: 1.5rem; }
 .program-row { margin-bottom: 3rem; position: relative; }
 .program-row::before { content: ''; position: absolute; left: -1.85rem; top: 5px; width: 10px; height: 10px; background: var(--bg-color); border: 2px solid var(--accent-gold); border-radius: 50%; }
+
 .p-time { font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
 .p-info h3 { font-size: 1.6rem; margin-bottom: 0.5rem; font-weight: 400; }
 .p-info p { color: #666; margin-bottom: 1rem; }
 .map-link { display: inline-flex; align-items: center; gap: 5px; color: var(--accent-sage); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; margin-bottom: 1rem; }
 .map-embed { width: 100%; border-radius: 4px; overflow: hidden; filter: grayscale(100%) contrast(95%); border: 1px solid rgba(166, 138, 100, 0.3); }
+
 .accommodation-simple { text-align: center; margin-top: 4rem; padding: 2rem 1rem; border-top: 1px solid rgba(166, 138, 100, 0.3); max-width: 600px; margin-left: auto; margin-right: auto;}
-.rsvp-section { padding: 100px 20px; text-align: center; background: var(--accent-gold); color: var(--bg-color); }
+.accommodation-simple h4 { color: var(--accent-terra); font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+/* --- RSVP --- */
+.rsvp-section { width: 100%; padding: 100px 20px; text-align: center; background: var(--accent-gold); color: var(--bg-color); }
 .cta-button { display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: var(--bg-color); color: var(--accent-gold); text-decoration: none; font-family: var(--font-heading); font-size: 1.2rem; transition: transform 0.3s; border: 1px solid var(--bg-color); }
 footer { padding: 2rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
 
 
 /* =========================================
-   MOBILE ADAPTIVE (FIX CRITICO & SICURO)
+   MOBILE ADAPTIVE (FIX SPOSTAMENTO E DIMENSIONI)
    ========================================= */
 @media (max-width: 768px) {
-    /* 1. EROINA MOBILE */
-    .hero { padding: 4rem 1rem; }
+    /* 1. EROINA MOBILE (FIX CENTRATURA) */
+    .hero { 
+        padding: 4rem 1rem; /* Padding simmetrico essenziale */
+        justify-content: center;
+        display: flex;
+    }
     
-    /* 2. FIORI MOBILE "DOMATI" */
-    /* Dimensione fissa in pixel per sicurezza, non % */
-    .flower { width: auto; max-width: 220px; opacity: 0.8; }
+    .hero-content {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0; /* Rimuovo padding interno che potrebbe sbilanciare */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Forza centro */
+    }
 
-    /* Posizionamento con pixel negativi specifici per ancorarli ai bordi */
-    .f-tl { top: -30px; left: -40px; transform-origin: top left; transform: rotate(25deg); }
-    .f-tr { top: -20px; right: -50px; transform-origin: top right; transform: rotate(-10deg); }
-    /* Bottom: auto per resettare, usiamo solo bottom */
-    .f-bl { bottom: -30px; left: -40px; top: auto; transform-origin: bottom left; transform: rotate(-10deg); }
-    .f-br { bottom: -40px; right: -30px; top: auto; transform-origin: bottom right; transform: rotate(15deg); }
+    .names { 
+        font-size: 2.8rem; /* RIDOTTO: Era troppo grande e shiftava */
+        line-height: 1.1; 
+        margin-bottom: 0.5rem;
+        width: 100%; /* Occupa tutto lo spazio per centrarsi */
+        text-align: center;
+    }
+    .date { 
+        font-size: 1rem; 
+        margin-bottom: 1.5rem; 
+        width: 100%;
+        text-align: center;
+    }
 
-    /* 3. COUNTDOWN COMPATTO */
-    .countdown-container { gap: 0.5rem; }
-    .time-card { min-width: 70px; padding: 0.8rem 0.5rem; }
-    .time-card span { font-size: 2rem; }
+    /* 2. FIORI MOBILE (ANCORAGGIO NEGATIVO) */
+    .flower { width: auto; max-width: 180px; opacity: 0.8; }
+
+    /* Top Left: Più interno */
+    .f-tl { top: -20px; left: -30px; transform-origin: top left; transform: rotate(20deg); }
+    /* Top Right */
+    .f-tr { top: -10px; right: -40px; transform-origin: top right; transform: rotate(-10deg); }
+    /* Bottom Left */
+    .f-bl { bottom: -20px; left: -40px; top: auto; transform-origin: bottom left; transform: rotate(-10deg); }
+    /* Bottom Right */
+    .f-br { bottom: -30px; right: -30px; top: auto; transform-origin: bottom right; transform: rotate(10deg); }
+
+    /* 3. COUNTDOWN COMPATTO (RIDOTTO) */
+    .countdown-container { 
+        gap: 0.5rem; 
+        width: 100%;
+        justify-content: center;
+    }
+    .time-card { 
+        min-width: 65px; /* Molto più stretto */
+        padding: 0.6rem 0.4rem; 
+    }
+    .time-card span { 
+        font-size: 1.8rem; /* Font più piccolo */
+    }
+    .time-card small {
+        font-size: 0.6rem;
+    }
     
-    /* 4. STORIA MOBILE (TESTO NON TAGLIATO) */
-    .story-section { padding: 60px 0; }
-    /* Padding laterale di 20px a destra e sinistra OBBLIGATORIO */
-    .container-text { padding: 0 20px; width: 100%; box-sizing: border-box; }
-    
-    .drop-cap { font-size: 3.5rem; padding-right: 8px; }
+    /* 4. STORIA MOBILE */
+    .story-section { padding: 50px 0; }
+    .container-text { padding: 0 20px; width: 100%; }
+    .section-title { font-size: 2.2rem; margin-bottom: 1.5rem; }
+    .story-body p { text-align: left; font-size: 1rem; line-height: 1.5; }
+    .drop-cap { font-size: 3rem; padding-right: 8px; }
     
     /* 5. PROGRAMMA MOBILE */
-    .program-section { padding: 60px 20px; }
-    .program-list { padding-left: 1rem; margin: 0; } /* Reset margini */
+    .program-section { padding: 50px 20px; }
+    .program-list { padding-left: 1rem; margin: 0; width: 100%; } 
 }
